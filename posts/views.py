@@ -40,16 +40,11 @@ def delete(request, post_id):
 
 def edit(request, post_id):
     post = Post.objects.get(id=post_id)
-    # if the method is post
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
-    # If the form is valid
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
-    # yes save
-    # redirect to home
-    # no, show error
         else:
             return HttpResponseRedirect(form.errors.as_json())
 
